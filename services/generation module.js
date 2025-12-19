@@ -1,24 +1,26 @@
-class ImportJson {
+class Random12Extension {
     getInfo() {
         return {
-            id: 'importjson',
-            name: 'Importer JSON',
+            id: 'random12',
+            name: 'ADV Variables',
             blocks: [
                 {
-                    opcode: 'loadJson',
+                    opcode: 'generate',
                     blockType: Scratch.BlockType.REPORTER,
-                    text: 'charger JSON url [URL]'
+                    text: 'générer code aléatoire (12 caractères)'
                 }
             ]
         };
     }
-  
-    loadJson(args) {
-        return fetch(args.URL)
-            .then(res => res.json())
-            .then(json => JSON.stringify(json))
-            .catch(() => 'Erreur JSON');
+
+    generate() {
+        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < 12; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
     }
 }
 
-Scratch.extensions.register(new ImportJson());
+Scratch.extensions.register(new Random12Extension());
